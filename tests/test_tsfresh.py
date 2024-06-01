@@ -65,6 +65,8 @@ from functime.feature_extractors import (
     variation_coefficient,
 )
 
+ERROR_EPSION = 1e-10
+
 np.random.seed(42)
 
 
@@ -471,7 +473,7 @@ def test_approximate_entropy(S, res, m, r, scale):
             )
             - res
         )
-        < 1e-10
+        < ERROR_EPSION
     )
 
 
