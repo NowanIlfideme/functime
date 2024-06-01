@@ -465,10 +465,13 @@ def test_absolute_sum_of_changes(S, res):
 )
 def test_approximate_entropy(S, res, m, r, scale):
     assert (
-        approximate_entropy(
-            x=pl.Series(S), run_length=m, filtering_level=r, scale_by_std=scale
+        abs(
+            approximate_entropy(
+                x=pl.Series(S), run_length=m, filtering_level=r, scale_by_std=scale
+            )
+            - res
         )
-        == res
+        < 1e-10
     )
 
 
@@ -1117,6 +1120,7 @@ def test_mean_n_absolute_max(S, n_max, res):
 #         mean_n_absolute_max(x=pl.Series([12, 3]), n_maxima=0)
 #     with pytest.raises(ValueError):
 #         mean_n_absolute_max(x=pl.Series([12, 3]), n_maxima=-1)
+
 
 @pytest.mark.parametrize(
     "S, res",
